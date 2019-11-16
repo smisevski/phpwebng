@@ -8,7 +8,9 @@ class View
     }
     
     public function setViewParams($view_params) {
-        
+        foreach ($view_params as $param_key => $param_value) {
+            ddie($param_value);
+        }
     }
     
 }

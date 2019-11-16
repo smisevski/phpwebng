@@ -1,24 +1,23 @@
 <?php
 namespace core;
 
-use core\lib\interfaces\StringResolveHelper;
 
-class Request implements StringResolveHelper {
-    public $fields;
+// class Request implements StringResolveHelper {
+//     public $fields;
     
-    function __construct() {
-        $var = 'daa';
-        print_r($var);
+//     function __construct() {
+//         $var = 'daa';
+//         print_r($var);
         
-    }
+//     }
 
-    public function resolveURLparams() {
-        ;
-    }
+//     public function resolveURLparams() {
+//         ;
+//     }
 
-    public static function displayReq() {
-        print_r($_SERVER['REQUEST_METHOD']);
-    }
+//     public static function displayReq() {
+//         print_r($_SERVER['REQUEST_METHOD']);
+//     }
     
     
-}
+// }

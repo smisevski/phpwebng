@@ -1,7 +1,8 @@
 <?php
-namespace core\lib\interfaces;
+//namespace core\lib\interfaces;
 
-interface StringResolveHelper {
+interface StringResolveHelper 
+{
     
     public function resolveURLparams($url);
     

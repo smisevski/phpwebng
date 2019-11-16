@@ -6,13 +6,16 @@ require_once('./routing/routes.php');
 
 //session_start();
 
-$url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : [];
+$url = isset($_SERVER['PATH_INFO']) ?
+       $_SERVER['PATH_INFO'] :
+       (isset($_SERVER['ORIG_PATH_INFO']) ? $_SERVER['ORIG_PATH_INFO'] : '');
 
 $url_one = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
 //ini_set('display_errors', 1);
 //
 //error_reporting(E_ALL);
-
+Router::handleURLRequest($url);
+// ddie($url);
 // Router::test($url_one);
 // Router::post($url_one);
 ?>
