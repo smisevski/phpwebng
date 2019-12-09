@@ -13,7 +13,7 @@ function class_autoloader($class_name) {
         require_once('./app/controllers/'.$class_name.'.php');
     } elseif (file_exists('./app/'.$class_name.'.php')) {
         require_once('./app/'.$class_name.'.php');
-    } elseif (file_exists('./core/lib/interfaces/'.$class_name.'.php')) {
+    } elseif (file_exists('./core/lib/'.$class_name.'.php')) {
         require_once('./core/lib/interfaces/'.$class_name.'.php');
     }
 //     elseif ($class_name.'.php') {

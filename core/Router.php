@@ -1,5 +1,4 @@
 <?php
-//use core\lib\interfaces\StringResolveHelper;
 
 class Router  
 {
@@ -10,7 +9,7 @@ class Router
     public static $route_registry = [];
         
     public function __construct(){
-        //
+        
     }
     
     
@@ -19,8 +18,9 @@ class Router
         $url = substr($url, 1);
         
         $action_trigger = false;
+        
+        self::__resolveURLparams($url);
 
-       
         for ($i = 0; $i < sizeof(self::$route_registry); $i++) {
             
             if ($url == self::$route_registry[$i]['name']) {
@@ -91,28 +91,83 @@ class Router
         
         if(isset($url) && $url != '') {
             
-            $url_parts = explode('/', $url);
+            $url_parts = explode('/', $url);    
             
-            $return_params = [];
+            $parametrized = false;
             
-            ddie($url_parts);
+            $parameter = null;
             
             if (sizeof($url_parts) > 1) {
-                // do the parameters handling options. send to action
-                //
-                for ($i = 0; $i < sizeof($url_parts); $i++) {
+            
+                foreach (self::$route_registry as $route_key => $route_val) {
                     
-                    $return_params[$$url_parts[$i]] = $url_parts[$i];
+                    $route_name_parts = explode('/', $route_val['name']);
                     
+                    if(sizeof($route_name_parts) == sizeof($url_parts)) {
+                        
+                        if (self::__routeArrayCompare($route_name_parts, $url_parts)) {
+                            
+                            if (isset($route_name_parts[sizeof($url_parts) -1])
+                                && substr($route_name_parts[sizeof($url_parts) -1], 0, 1) == ':') {
+                                                                                                    
+                                     $parametrized = true;
+                                     
+                                     $parameter = $url_parts[sizeof($url_parts) -1];
+                                     
+                                     $controller_ref = $route_val['controller'];
+                                     
+                                     $method_ref = $route_val['controller_method'];
+                                     
+                                     $controller = new $controller_ref;
+                                     
+                                     $route_val['http_method'] == 'GET' ?
+                                     
+                                     $controller->$method_ref($parameter) :
+                                     
+                                     $controller->$method_ref($_POST, $parameter);
+                                     
+                                     $action_trigger = true;
+                                     
+                                     exit;
+                                    
+                            }
+                            
+                        }
+                        
+                    }
+                         
                 }
                 
-                ddie($return_params);
+            } 
+            
+        }
+    }
+    
+    
+    private function __routeArrayCompare($registered_route, $requested_route) : bool {
+        
+        $validity_passed = 0;
                 
-            } else {
+        for ($i = 0; $i < sizeof($requested_route) -1; $i++) {
+            
+            if ($requested_route[$i] == $registered_route[$i]) {
                 
+                $validity_passed++;
+                                
             }
             
         }
+        
+        if ($validity_passed == sizeof($registered_route) -1) {
+                       
+            return true;
+            
+        } else {
+            
+            return false;
+            
+        }
+        
     }
 
 }  

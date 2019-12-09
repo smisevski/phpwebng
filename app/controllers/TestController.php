@@ -15,8 +15,8 @@ class TestController extends Controller
         echo "GOTTEN";
     }
     
-    public function printParameterCommand() {
-        echo "GOTTEN WITH PARAMS";
+    public function printParameterCommand($id) {
+        echo "GOTTEN WITH PARAMS: " . $id ;
     }
 
     public function postCommand() {
