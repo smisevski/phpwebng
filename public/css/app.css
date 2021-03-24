@@ -1,5 +1,11 @@
-*,
-body,
-html {
-  font: 'Roboto', sans-serif;
+.main-container {
+  background-color: darkkhaki;
+}
+
+.title {
+  color: blueviolet;
+}
+
+h1 {
+  font-family: Arial;
 }

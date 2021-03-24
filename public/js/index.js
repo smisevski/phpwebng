@@ -1,8 +1,7 @@
-/**
- *
- */
-window.onload(
-  function initFrontendApp() {
-    return;
+window.onload = function() {
+  var d = document.getElementById('t');
+  console.log(d);
+  d.onclick = function(ob) {
+    d.style.color == 'red' ? d.style.color = 'purple' : d.style.color = 'red';
   }
-);
+}

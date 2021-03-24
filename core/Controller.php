@@ -1,17 +1,19 @@
 <?php
 
-abstract class Controller
-{
-    
-    public $view;
-    
-    public $redirect;
+use core\View;
 
-    function __construct() {
-        
-        $this->view = new View();
-        
-    }
+namespace core {
+  abstract class Controller
+  {
+
+      public $view;
+
+      public $redirect;
+
+      function __construct() {
+          $this->view = new View();
+      }
 
 
+  }
 }

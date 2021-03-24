@@ -1,15 +1,22 @@
 <?php
 
-class View
-{
-    public function displayView($view_filepath) {
-          
+namespace core {
+  class View
+  {
+    public $viewname;
+    public $tpl;
+    public function with(array $data): void
+    {
+      
     }
-    
-    public function setViewParams($view_params) {
-        foreach ($view_params as $param_key => $param_value) {
-            ddie($param_value);
-        }
+
+    public function display(string $viewname, $data)
+    {
+      extract($data);
+      ob_start();
+      include(SYS_PATH . '/app/views/' . $viewname . '.php');
+      $buffer = ob_get_contents();
+      return $buffer;
     }
-    
+  }
 }
