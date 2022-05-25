@@ -16,6 +16,7 @@ namespace core {
       ob_start();
       include(SYS_PATH . '/app/views/' . $viewname . '.php');
       $buffer = ob_get_contents();
+      ob_clean();
       return $buffer;
     }
   }

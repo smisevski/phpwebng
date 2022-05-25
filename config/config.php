@@ -3,12 +3,12 @@
 *
 *    THIS SHOUD BE THE CONFIGURATION FILE FOR THE APPLICATION/FRAMEWORK
 *    WHERE WE WOULD DEFINE ALL OF OUR CONSTANTS USED GLOBALLY THROUGH THE APP.
-*    THIS FILE IS ALSO AUTOLOADED IN THE LOADER (core/loader.php) SCRIPT
+*    THIS FILE IS ALSO AUTOLOADED IN THE LOADER (core/App.php) SCRIPT
 */
 
 // APPLICATION
 define('SYS_PATH', getcwd());
-define('ROOT_PATH', 'http:\\localhost\\PHPWebNg-basic-Framework\\');
+define('ROOT_PATH', 'Http:\\localhost\\PHPWebNg-basic-Framework\\');
 define('APP_NAME', 'Application Name');
 define('AUTHOR_NAME', 'Application Name');
 define('DESCRIPTION', 'Website tester for custom php lite framework.');

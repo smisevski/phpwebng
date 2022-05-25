@@ -13,11 +13,10 @@
 
   <body>
     <div class="main-container">
-    <h1 id="t" class="title"><?=$time ?></h1>
       <h1>HOME LAYOUT ROOT</h1>
-        <?php foreach($data as $itemK): ?>
-          <h1><?=$itemK ?></h1>
-        <?php endforeach; ?>
+<!--        --><?php //foreach($data as $itemK): ?>
+<!--          <h1>--><?//=$itemK ?><!--</h1>-->
+<!--        --><?php //endforeach; ?>
     </div>
   </body>
   </html>

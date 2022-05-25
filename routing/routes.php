@@ -2,15 +2,17 @@
 /**
  * This is where the route endpoints are defined, with their controller handlers
  */
+use core\Router;
+use app\controllers\StudentController;
 
-Router::get('', "TestController@Index");
 
-Router::get('test', "TestController@PrintCommand");
+Router::post('addStudent', StudentController::class, 'addStudent');
+Router::get('getStudentById/:studentId', StudentController::class, 'getStudentById');
 
-Router::get('test/te', "TestController@PrintParameterCommand");
+Router::post('addGrade', StudentController::class, 'addGrade');
+Router::get('getStudentGrades/:studentId', StudentController::class, 'getStudentGrades');
 
-Router::get('test/cat1/cat2/:id', "TestController@PrintParameterCommand");
 
-Router::post('post_test', "TestController@PostCommand");
 
-Router::get('view', "TestController@TestView");
+
+

@@ -1,18 +1,17 @@
 <?php
 declare(strict_types=1);
+//namespace main;
+ini_set('display_errors', '1');
+error_reporting(E_ERROR);
+use core\App;
+require_once('core/App.php');
+$app = new App();
 
-require_once('./core/loader.php');
-require_once('./routing/routes.php');
+$app->builder->serviceContainer->setService(\app\services\StudentService::class, function ($containerInstance) {
+    return new \app\services\StudentService();
+});
+$app->builder->serviceContainer->setService(\app\data\DbContext::class, function ($containerInstance) {
+    return new \app\data\DbContext();
+});
+$app->run();
 
-
-$url = isset($_SERVER['PATH_INFO']) ?
-
-       $_SERVER['PATH_INFO'] :
-
-       (isset($_SERVER['ORIG_PATH_INFO']) ? $_SERVER['ORIG_PATH_INFO'] : '');
-
-$url_one = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
-
-Router::handleURLRequest($url);
-
-?>
