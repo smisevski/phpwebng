@@ -20,8 +20,8 @@ class ServiceContainer implements ContainerInterface
             $entry = $this->entries[$id];
             return $entry($this);
         }
-//        if ($id == "app\\services\\StudentService")
-//        die(json_encode(['$entries' => $this->entries]));
+       if ($id == "app\\data\\DbContext")
+        die(json_encode(['$entries' => $this->entries]));
 
 
         return $this->resolve($id);
