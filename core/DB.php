@@ -10,6 +10,7 @@ use PDOException;
 
       public function __construct() {
           $connParams = Configuration::get('connectionParametersMysql');
+        //   print_r($connParams);die;
           $this->connect($connParams);
       }
 

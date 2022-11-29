@@ -20,8 +20,8 @@ class ServiceContainer implements ContainerInterface
             $entry = $this->entries[$id];
             return $entry($this);
         }
-       if ($id == "app\\data\\DbContext")
-        die(json_encode(['$entries' => $this->entries]));
+        // if ($id == "app\\services\\StudentService")
+        //     die(json_encode(['$entries' => $this->entries]));
 
 
         return $this->resolve($id);
@@ -40,8 +40,7 @@ class ServiceContainer implements ContainerInterface
     public function resolve(string $id)
     {
         $reflectionClass = new ReflectionClass($id);
-        if ($id == "app\\services\\StudentService")
-            die(json_encode(['$entries' => $this->entries]));
+
         if (!$reflectionClass->isInstantiable()) {
             throw new \ReflectionException('Class "' . $id . '" is not instantiable');
         }
@@ -71,9 +70,12 @@ class ServiceContainer implements ContainerInterface
                 }
 
                 if ($type instanceof \ReflectionNamedType && !$type->isBuiltin()) {
+                    if ($name = 'Response') {
+                        print_r($param);die;
+                    }
                     return $this->get($type->getName());
                 }
-
+                
                 throw new Exception(
                     'Failed to resolve class "' . $id . '" because invalid param "' . $name . '"'
                 );
@@ -100,7 +102,7 @@ class ServiceContainer implements ContainerInterface
         foreach ($parameters as $parameter) {
 
             if ($parameter->hasType()) {
-                $dependenceClass = (string)$parameter->getType();
+                $dependenceClass = $parameter->getType();
                 $dependencies[] = new $dependenceClass();
             }
 

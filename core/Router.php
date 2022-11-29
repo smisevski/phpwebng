@@ -74,7 +74,7 @@ class Router
     }
 
 
-    private function resolveURLparams($url, $serviceContainer)
+    private static function resolveURLparams($url, $serviceContainer)
     {
 
         if (isset($url) && $url != '') {
@@ -95,7 +95,7 @@ class Router
                                 && substr($route_name_parts[sizeof($url_parts) - 1], 0, 1) == ':') {
 
 
-                                // ^^ ovoj del mora da se refaktorira so array_ f-iite
+                                // TODO:^^ ovoj del mora da se refaktorira so array_ f-iite
                                 $parameter = $url_parts[sizeof($url_parts) - 1];
 
                                 $controller_ref = $route_val['controller'];
@@ -128,7 +128,7 @@ class Router
     }
 
 
-    private function routeArrayCompare($registered_route, $requested_route): bool
+    private static function routeArrayCompare($registered_route, $requested_route): bool
     {
 
         $validity_passed = 0;

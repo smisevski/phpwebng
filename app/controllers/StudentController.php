@@ -62,4 +62,13 @@ class StudentController extends Controller
         }
     }
 
+    public function test(Response $response)
+    {
+    
+       return $response->status(200)->toJSON([
+            1 => 'One',
+            2 => 'Two'
+       ]);
+    }
+
 }
