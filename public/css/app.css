@@ -9,3 +9,9 @@
 h1 {
   font-family: Arial;
 }
+
+.custom-headline {
+  font-weight: bolder;
+  color: black;
+  font-size: 24pt;
+}

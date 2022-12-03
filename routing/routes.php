@@ -13,6 +13,7 @@ Router::post('addGrade', StudentController::class, 'addGrade');
 Router::get('getStudentGrades/:studentId', StudentController::class, 'getStudentGrades');
 
 Router::get('test', StudentController::class, 'test');
+Router::get('', StudentController::class, 'index');
 
 
 

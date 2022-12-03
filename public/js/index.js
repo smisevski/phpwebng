@@ -5,3 +5,7 @@ window.onload = function() {
     d.style.color == 'red' ? d.style.color = 'purple' : d.style.color = 'red';
   }
 }
+
+function openDialog(params) {
+  console.log('Opening dialog...');
+};

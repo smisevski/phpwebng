@@ -1,5 +1,7 @@
 <?php
+
 namespace app\services;
+
 use app\data\DbContext;
 use app\interfaces\SchoolBoardsInterface;
 use PDO;
@@ -77,12 +79,12 @@ class StudentService implements SchoolBoardsInterface
         return $result;
     }
 
-    public function CSMAverage($grades) : int
+    public function CSMAverage($grades): int
     {
         return 0;
     }
 
-    public function CSMBAverage($grades) : int
+    public function CSMBAverage($grades): int
     {
         return 0;
     }

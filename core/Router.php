@@ -9,13 +9,8 @@ class Router
 
     public static $route_registry = [];
 
-    public function __construct()
-    {
 
-    }
-
-
-    public static function handleURLRequest($url, $serviceContainer)
+    public static function handleURLRequest($url, $serviceContainer) : callable
     {
 
         $url = substr($url, 1);
@@ -42,39 +37,29 @@ class Router
     }
 
 
-    public static function get($url, $controller, $method)
+    public static function get($url, $controller, $method) : void
     {
-
-        $route_spec['name'] = $url;
-
-        $route_spec['http_method'] = 'GET';
-
-        $route_spec['controller'] = $controller;
-
-        $route_spec['controller_method'] = $method;
-
-        self::$route_registry[] = $route_spec;
-
+        self::$route_registry[] = [
+            'name' => $url,
+            'http_method' => 'GET',
+            'controller' => $controller,
+            'controller_method' => $method,
+        ];
     }
 
 
-    public static function post($url, $controller, $method)
+    public static function post($url, $controller, $method) : void
     {
-
-        $route_spec['name'] = $url;
-
-        $route_spec['http_method'] = 'POST';
-
-        $route_spec['controller'] = $controller;
-
-        $route_spec['controller_method'] = $method;
-
-        self::$route_registry[] = $route_spec;
-
+        self::$route_registry[] = [
+            'name' => $url,
+            'http_method' => 'POST',
+            'controller' => $controller,
+            'controller_method' => $method,
+        ];
     }
 
 
-    private static function resolveURLparams($url, $serviceContainer)
+    private static function resolveURLparams($url, $serviceContainer) : callable
     {
 
         if (isset($url) && $url != '') {
@@ -94,25 +79,24 @@ class Router
                             if (isset($route_name_parts[sizeof($url_parts) - 1])
                                 && substr($route_name_parts[sizeof($url_parts) - 1], 0, 1) == ':') {
 
-
-                                // TODO:^^ ovoj del mora da se refaktorira so array_ f-iite
                                 $parameter = $url_parts[sizeof($url_parts) - 1];
 
                                 $controller_ref = $route_val['controller'];
 
                                 $method_ref = $route_val['controller_method'];
-//                                die(json_encode(['$parameter' => $parameter]));
-
+                                
                                 $controller = $serviceContainer->get($controller_ref);
                                 $methodArgs = !empty($serviceContainer->getMethodArgs($controller_ref, $method_ref)) ?
                                     $serviceContainer->getMethodArgs($controller_ref, $method_ref) : [];
+                                
+
                                 $methodArgs[] = $parameter;
 
                                 if (method_exists($controller, $method_ref)) {
                                     return call_user_func_array([$controller, $method_ref], $methodArgs);
                                 }
-                                exit;
 
+                                exit;
 
                             }
 
@@ -128,30 +112,17 @@ class Router
     }
 
 
-    private static function routeArrayCompare($registered_route, $requested_route): bool
+    private static function routeArrayCompare($registered_route, $requested_route) : bool
     {
-
         $validity_passed = 0;
-
+        
         for ($i = 0; $i < sizeof($requested_route) - 1; $i++) {
 
-            if ($requested_route[$i] == $registered_route[$i]) {
-
-                $validity_passed++;
-
-            }
-
+            if ($requested_route[$i] == $registered_route[$i]) $validity_passed++;
         }
-
-        if ($validity_passed == sizeof($registered_route) - 1) {
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
-
+        
+        if ($validity_passed == sizeof($registered_route) - 1) return true;
+        
+        else return false;
     }
 }  

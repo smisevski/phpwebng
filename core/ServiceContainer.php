@@ -20,9 +20,6 @@ class ServiceContainer implements ContainerInterface
             $entry = $this->entries[$id];
             return $entry($this);
         }
-        // if ($id == "app\\services\\StudentService")
-        //     die(json_encode(['$entries' => $this->entries]));
-
 
         return $this->resolve($id);
     }
@@ -47,7 +44,6 @@ class ServiceContainer implements ContainerInterface
 
         $constructor = $reflectionClass->getConstructor();
 
-
         if (!$constructor) {
             return new $id;
         }
@@ -57,6 +53,7 @@ class ServiceContainer implements ContainerInterface
         if (!$parameters) {
             return new $id;
         }
+        
         $dependencies = array_map(
             function (ReflectionParameter $param) use ($id) {
                 $name = $param->getName();
@@ -70,9 +67,6 @@ class ServiceContainer implements ContainerInterface
                 }
 
                 if ($type instanceof \ReflectionNamedType && !$type->isBuiltin()) {
-                    if ($name = 'Response') {
-                        print_r($param);die;
-                    }
                     return $this->get($type->getName());
                 }
                 
@@ -100,12 +94,10 @@ class ServiceContainer implements ContainerInterface
         $parameters = $method->getParameters();
 
         foreach ($parameters as $parameter) {
-
             if ($parameter->hasType()) {
-                $dependenceClass = $parameter->getType();
+                $dependenceClass = $parameter->getType()->getName();
                 $dependencies[] = new $dependenceClass();
             }
-
         }
         return $dependencies;
     }
